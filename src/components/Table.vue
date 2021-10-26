@@ -1,12 +1,17 @@
 <template>    
     <section class="awesome-table">
-        <div class="text-uppercase text-bold">id selected: {{selected}}</div>
-        <table>
+        <div class="text-uppercase text-bold">select id: {{ selected }}</div>
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th v-for="(obj, ind) in config" :key="ind">
                         {{ obj.title }}
+                        <label v-if="obj.type === 'checkbox'" class="form-checkbox">
+                            <input type="checkbox" v-model="selectAll" @click="select">
+                            <i class="form-icon"></i>
+                        </label>
                     </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -16,8 +21,8 @@
                         <ul v-if="obj.type === 'array'">
                             <li v-for="ob, in row[obj.key]" :key="ob.id">{{ ob.name }}</li>
                         </ul>
-                        <label v-if="obj.type === 'checkbox'" class="form-checkbox">
-                            <input type="checkbox" :value="row[obj.key]" v-model="selected">
+                        <label  v-if="obj.type === 'checkbox'" class="form-checkbox">
+                            <input type="checkbox" :value="theData[index]" v-model="selected">
                             <i class="form-icon"></i>
                         </label>
                     </td>
@@ -28,6 +33,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     name: 'CustomTable',
     props: ['theData', 'config'],
@@ -35,12 +42,28 @@ export default {
         selectAll: false,
         selected: []
     }),
-    select() {
-        this.selected = [];
-        if (!this.selectAll) {
-            for (let i in this.items) {
-                this.selected.push(this.items[i].id);
+    computed: {
+        ...mapGetters({
+            onhands: 'onhands',
+            list: 'products'
+        })
+    },
+    methods: {
+        select() {
+            this.selected = [];
+            if (!this.selectAll) {
+                for (let i in this.list) {
+                    this.selected.push(this.list[i]);
+                }
             }
+        }
+    },
+    mounted() {
+        this.selected = this.onhands;
+    },
+    watch: {
+        selected: function() {
+            this.$store.dispatch("setProductsOnHand", this.selected);
         }
     }
 }
@@ -48,6 +71,7 @@ export default {
 
 <style scoped>
 
+/*
 body{
 	padding: 50px
 }
@@ -77,5 +101,6 @@ td {
     padding: 5px 5px;
     text-align: left;
 }
+*/
 
 </style>
