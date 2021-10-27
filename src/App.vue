@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <v-con>
+      <!-- Navbar goes here -->
       <div id="nav">
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
+        <router-link to="/">Home</router-link> |
+        <router-link to="/feature">Feature</router-link>
       </div>
     </v-con>
     <router-view/>
@@ -11,6 +12,25 @@
       <Footer/>
     </v-con>
     
+
+
+    <!-- Page Layout here -->
+    <div class="row">
+
+      <div class="col s3">
+        <!-- Grey navigation panel -->
+      </div>
+
+      <div class="col s9">
+        <!-- Teal page content  -->
+      </div>
+
+    </div>
+
+
+
+
+
   </v-app>  
 </template>
 

@@ -44,5 +44,9 @@ body {
     flex: 1 0 auto;
   }
 
+  footer{
+    bottom: 0;
+}
+
 
 </style>
