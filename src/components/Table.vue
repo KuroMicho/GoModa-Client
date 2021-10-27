@@ -22,7 +22,7 @@
                             <li v-for="ob, in row[obj.key]" :key="ob.id">{{ ob.name }}</li>
                         </ul>
                         <label  v-if="obj.type === 'checkbox'" class="form-checkbox">
-                            <input type="checkbox" :value="theData[index]" v-model="selected">
+                            <input type="checkbox" :value="theData[index]" v-model="selected" @click="setSelected">
                             <i class="form-icon"></i>
                         </label>
                     </td>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+//import { mapGetters } from 'vuex';
 
 export default {
     name: 'CustomTable',
@@ -43,28 +43,35 @@ export default {
         selected: []
     }),
     computed: {
+        /*
         ...mapGetters({
             onhands: 'onhands',
             list: 'products'
         })
+        */
     },
     methods: {
         select() {
             this.selected = [];
             if (!this.selectAll) {
-                for (let i in this.list) {
-                    this.selected.push(this.list[i]);
+                for (let i in this.theData) {
+                    this.selected.push(this.theData[i]);
                 }
             }
+        },
+        setSelect() {
+            this.$emit("getSelected", this.selected);
         }
     },
     mounted() {
-        this.selected = this.onhands;
+        //this.selected = this.onhands;
     },
     watch: {
+        /*
         selected: function() {
             this.$store.dispatch("setProductsOnHand", this.selected);
         }
+        */
     }
 }
 </script>

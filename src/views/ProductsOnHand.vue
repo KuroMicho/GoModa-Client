@@ -3,7 +3,8 @@
     <CustomTable 
       v-if="products" 
       :theData="products" 
-      :config="config" 
+      :config="config"
+      @getSelected="getSelected"
       :style="{height: '600px'}"
     />
   </div>
@@ -19,6 +20,7 @@ export default {
   },
   data: () => ({
     tableData: undefined,
+    selected: [],
     config: [
       {
         key: 'barcode',
@@ -78,6 +80,9 @@ export default {
   },
   methods: {
     ...mapActions(["getProducts"]),
+    getSelected(data) {
+      this.selected = data;
+    } 
   },
   mounted () {
     this.getProducts()
