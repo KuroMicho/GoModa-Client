@@ -5,6 +5,7 @@
       :theData="products" 
       :config="config"
       @getSelected="getSelected"
+      v-model:textValue="valueInput"
       :style="{height: '600px'}"
     />
   </div>
@@ -21,6 +22,7 @@ export default {
   data: () => ({
     tableData: undefined,
     selected: [],
+    valueInput: "",
     config: [
       {
         key: 'barcode',
@@ -79,7 +81,7 @@ export default {
     ...mapState(["products"]),
   },
   methods: {
-    ...mapActions(["getProducts"]),
+    ...mapActions(["getProducts", "getProductsByName"]),
     getSelected(data) {
       this.selected = data;
     } 
@@ -87,6 +89,12 @@ export default {
   mounted () {
     this.getProducts()
   },
+  watch: {
+        valueInput: function() {
+            //this.$store.dispatch("setProductsOnHand", this.selected);
+            this.$store.dispatch("getProductsByName", this.valueInput)
+        }
+    }
 }
 </script>
 

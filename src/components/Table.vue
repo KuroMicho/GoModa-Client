@@ -1,6 +1,14 @@
 <template>    
     <section class="awesome-table">
-        <div class="text-uppercase text-bold">select id: {{ selected }}</div>
+        <div class="text-uppercase text-bold">select product: {{ selected }}</div>
+        <div class="text-uppercase text-bold">filter by name: {{ textValue }}</div>
+        <div class="col-md-6">
+            <input  
+            type="text" 
+            class="form-control"
+            :value="textValue"
+            @input="$emit('update:textValue', $event.target.value)">
+        </div>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -37,13 +45,18 @@
 
 export default {
     name: 'CustomTable',
-    props: ['theData', 'config'],
+    props: {
+        theData: Object, 
+        config: Object,
+        textValue: String
+    },
+    emits: ["update:textValue"],
     data: () => ({
         selectAll: false,
         selected: []
     }),
     computed: {
-        /*
+         /*
         ...mapGetters({
             onhands: 'onhands',
             list: 'products'
