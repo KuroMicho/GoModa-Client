@@ -1,28 +1,41 @@
 <template>
   <div id="tab">
-    <CustomTable 
+    <CustomTable
       v-if="products" 
       :theData="products" 
       :config="config"
       @getSelected="getSelected"
       v-model:textValue="valueInput"
-      :style="{height: '600px'}"
     />
+    <custom-select 
+      :lists="colors"
+      v-model:textValue="color"
+    />
+    <div>{{ color }}</div>
+    <custom-select 
+      :lists="materials"
+      v-model:textValue="material"
+    />
+    <div>{{ material }}</div>
   </div>
 </template>
 
 <script>
 import CustomTable from '../components/Table.vue'
-import { mapActions, mapState } from "vuex";
+import CustomSelect from '../components/Select.vue'
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
-    CustomTable
+    CustomTable,
+    CustomSelect,
   },
   data: () => ({
     tableData: undefined,
     selected: [],
     valueInput: "",
+    color: "",
+    material: "",
     config: [
       {
         key: 'barcode',
@@ -78,21 +91,26 @@ export default {
     ]
   }),
   computed: {
-    ...mapState(["products"]),
+    ...mapGetters(["products", "colors", "materials"]),
   },
   methods: {
-    ...mapActions(["getProducts", "getProductsByName"]),
+    ...mapActions(["getProducts", "getProductsByName", "getProductsByItem"]),
     getSelected(data) {
       this.selected = data;
-    } 
+    },
   },
   mounted () {
-    this.getProducts()
+    this.getProducts();
   },
   watch: {
         valueInput: function() {
-            //this.$store.dispatch("setProductsOnHand", this.selected);
-            this.$store.dispatch("getProductsByName", this.valueInput)
+            this.$store.dispatch("getProductsByName", this.valueInput);
+        },
+        color: function() {
+            this.$store.dispatch("getProductsByItem", this.color);
+        },
+        material: function() {
+            this.$store.dispatch("getProductsByItem", this.material);
         }
     }
 }
