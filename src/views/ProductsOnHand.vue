@@ -17,18 +17,25 @@
       v-model:textValue="material"
     />
     <div>{{ material }}</div>
+    <custom-button 
+    @saveSelected="saveSelected"
+    />
+    <div>{{ onhands }}</div>
+
   </div>
 </template>
 
 <script>
 import CustomTable from '../components/Table.vue'
 import CustomSelect from '../components/Select.vue'
+import CustomButton from '../components/Button.vue'
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     CustomTable,
     CustomSelect,
+    CustomButton,
   },
   data: () => ({
     tableData: undefined,
@@ -91,12 +98,15 @@ export default {
     ]
   }),
   computed: {
-    ...mapGetters(["products", "colors", "materials"]),
+    ...mapGetters(["products", "colors", "materials", "onhands"]),
   },
   methods: {
     ...mapActions(["getProducts", "getProductsByName", "getProductsByItem"]),
     getSelected(data) {
       this.selected = data;
+    },
+    saveSelected() {
+      this.$store.dispatch("setProductsOnHands", this.selected);
     },
   },
   mounted () {

@@ -24,7 +24,7 @@ export default createStore({
     setColors(state, payload) {
       state.colors = payload;
     }, 
-    setOnhand(state, payload) {
+    setOnhands(state, payload) {
       state.onhands = payload;
     },
   },
@@ -249,13 +249,11 @@ export default createStore({
         }
       ];
       commit("setProducts", data);
+    */
     },
-    setProductsOnHand({ commit }, select) {
-      commit("setOnhand",  select);
-    }
-    */   
+    setProductsOnHands({ commit }, select) {
+      commit("setOnhands",  select);
     },
-    
   },
   modules: {
   }
