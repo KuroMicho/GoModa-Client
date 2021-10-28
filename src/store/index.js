@@ -5,12 +5,14 @@ export default createStore({
   state: {
     products: [],
     onhands: [],
+    onhandsFilter: [],
     materials: [],
     colors: [],
   },
   getters: {
     products: state => state.products,
     onhands: state => state.onhands,
+    onhandsFilter: state => state.onhandsFilter,
     materials: state => state.materials,
     colors: state => state.colors,
   },
@@ -26,6 +28,9 @@ export default createStore({
     }, 
     setOnhands(state, payload) {
       state.onhands = payload;
+    },
+    setOnhandsFilter(state, payload) {
+      state.onhandsFilter = payload;
     },
   },
   actions: {
@@ -253,6 +258,10 @@ export default createStore({
     },
     setProductsOnHands({ commit }, select) {
       commit("setOnhands",  select);
+      commit("setOnhandsFilter",  select);
+    },
+    setProductsOnHandsFilter({ commit }, select) {
+      commit("setOnhandsFilter",  select);
     },
   },
   modules: {
