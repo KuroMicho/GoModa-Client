@@ -30,7 +30,7 @@
                             <li v-for="ob, in row[obj.key]" :key="ob.id">{{ ob.name }}</li>
                         </ul>
                         <label  v-if="obj.type === 'checkbox'" class="form-checkbox">
-                            <input type="checkbox" :value="theData[index]" v-model="selected" @click="setSelected">
+                            <input type="checkbox" :value="theData[index]" v-model="selected">
                             <i class="form-icon"></i>
                         </label>
                     </td>
@@ -72,19 +72,15 @@ export default {
                 }
             }
         },
-        setSelect() {
-            this.$emit("getSelected", this.selected);
-        }
     },
     mounted() {
         //this.selected = this.onhands;
     },
     watch: {
-        /*
         selected: function() {
-            this.$store.dispatch("setProductsOnHand", this.selected);
+            //this.$store.dispatch("setProductsOnHand", this.selected);
+            this.$emit("getSelected", this.selected);
         }
-        */
     }
 }
 </script>
