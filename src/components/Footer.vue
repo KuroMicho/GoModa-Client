@@ -1,26 +1,23 @@
 <template>
-        <footer class="page-footer">
+        <footer class="page-footer z-depth-1">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                <h5 class="blue-grey-text text-darken-4">gomodago</h5>
+                <p class="blue-grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                <h5 class="blue-grey-text text-darken-4">Links</h5>
+                <ul>  
+                  <li><a class="blue-grey-text text-darken-4 " href="https://cli.vuejs.org">Vue</a></li>
+                  <li><a class="blue-grey-text text-darken-4 " href="https://materializecss.com/">Materialize</a></li>                 
                 </ul>
               </div>
             </div>
           </div>
           <div class="footer-copyright">
-            <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <div class="container white-text">
+            <h6>© 2021 MISION TIC P22-5</h6>
             </div>
           </div>
         </footer>
@@ -44,9 +41,13 @@ body {
     flex: 1 0 auto;
   }
 
-  footer{
+  .page-footer{
+    background: #80DDD9;
     bottom: 0;
-}
-
+  }
+  .footer-copyright{
+    bottom: 0;
+    background: #7cddd8;
+  }
 
 </style>
