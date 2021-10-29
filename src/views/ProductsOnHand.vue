@@ -1,5 +1,7 @@
 <template>
+
   <div id="tab">
+      <!--
     <CustomTable
       v-if="products" 
       :theData="products" 
@@ -7,6 +9,82 @@
       @getSelected="getSelected"
       v-model:textValue="valueInput"
     />
+    -->
+    <el-table
+    ref="multipleTable"
+
+    :data="
+      products.filter(
+        (data) =>
+          !search || data.name.toLowerCase().includes(search.toLowerCase())
+      )
+    "    
+    style="width: 100%"
+    @selection-change="handleSelectionChange"
+  >
+    <el-table-column type="selection" width="55" />
+    <el-table-column property="barcode" label="Barcode" width="120" />
+    <el-table-column property="name" label="Name" width="120" />
+    <el-table-column property="price" label="Price" width="120" />
+    <el-table-column property="minimum_required" label="Minimum" width="120" />
+    <el-table-column property="inventory_received" label="Received" width="120" />
+    <el-table-column property="inventory_shipped" label="Shipped" width="120" />
+    <el-table-column property="inventory_onhand" label="On Hands" width="120" />
+    <el-table-column property="description" label="Description" show-overflow-tooltip />
+
+    <el-table-column align="right">
+      <template #header>
+        <el-input v-model="search" size="mini" placeholder="Type to search" />
+      </template>
+    </el-table-column>
+    
+  </el-table>
+
+  <div style="margin-top: 20px">
+    <el-button @click="toggleSelection()">Clear selection</el-button>
+    <el-button @click="saveSelected()">Sale Order</el-button>
+  </div>
+
+  <el-row class="tac">
+    <el-col :span="12">
+      <h5>Default selects</h5>
+      <el-menu
+        default-active="2"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+      >
+        <el-sub-menu index="1">
+          <template #title>
+            <i class="el-icon-location"></i>
+            <span>Colors</span>
+          </template>
+          <el-menu-item-group >
+            <el-menu-item 
+            @click="getColor(ind)" v-for="(row, ind) in colors" :key="ind" index="ind"
+            >
+              {{ row }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-sub-menu>
+        <el-sub-menu index="2">
+          <template #title>
+            <i class="el-icon-location"></i>
+            <span>Materials</span>
+          </template>
+          <el-menu-item-group >
+            <el-menu-item 
+            @click="getMaterial(ind)"  v-for="(row, ind) in materials" :key="ind" index="ind"
+            >
+              {{ row }}
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-sub-menu>
+      </el-menu>
+    </el-col>
+  </el-row>        
+        
+    <!--
     <custom-select 
       :lists="colors"
       v-model:textValue="color"
@@ -17,32 +95,37 @@
       v-model:textValue="material"
     />
     <div>{{ material }}</div>
+
     <custom-button 
     @saveSelected="saveSelected"
     />
     <div>{{ onhands }}</div>
+    -->
 
   </div>
 </template>
 
 <script>
-import CustomTable from '../components/Table.vue'
-import CustomSelect from '../components/Select.vue'
-import CustomButton from '../components/Button.vue'
+//import CustomTable from '../components/Table.vue'
+//import CustomSelect from '../components/Select.vue'
+//import CustomButton from '../components/Button.vue'
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
-    CustomTable,
-    CustomSelect,
-    CustomButton,
+//    CustomTable,
+//    CustomSelect,
+//    CustomButton,
   },
   data: () => ({
     tableData: undefined,
+    multipleSelection: [],
     selected: [],
+    search: '',
     valueInput: "",
     color: "",
     material: "",
+    value: "",
     config: [
       {
         key: 'barcode',
@@ -106,9 +189,38 @@ export default {
       this.selected = data;
     },
     saveSelected() {
-      this.$store.dispatch("setProductsOnHands", this.selected);
+      this.$store.dispatch("setProductsOnHands", this.multipleSelection);
+      //this.$store.dispatch("setProductsOnHands", this.selected);
     },
-  },
+    toggleSelection(rows) {
+      if (rows) {
+        rows.forEach((row) => {
+          this.$refs.multipleTable.toggleRowSelection(row)
+        })
+      } else {
+        this.$refs.multipleTable.clearSelection()
+      }
+      
+      this.$store.dispatch("getProductsByName", "");
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+      console.info(val);
+    },
+    handleOpen(key, keyPath)  {
+        console.log(key, keyPath);
+        
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },  
+    getColor(index) {
+        this.$store.dispatch("getProductsByItem", this.colors[index]);
+    },
+    getMaterial(index) {
+        this.$store.dispatch("getProductsByItem", this.materials[index]);
+    },    
+  },  
   mounted () {
     this.getProducts();
   },
@@ -116,12 +228,6 @@ export default {
         valueInput: function() {
             this.$store.dispatch("getProductsByName", this.valueInput);
         },
-        color: function() {
-            this.$store.dispatch("getProductsByItem", this.color);
-        },
-        material: function() {
-            this.$store.dispatch("getProductsByItem", this.material);
-        }
     }
 }
 </script>
