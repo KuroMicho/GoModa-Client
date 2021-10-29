@@ -30,7 +30,7 @@ export default createStore({
   },
   actions: {
     async getProducts({ commit }) {
-      /*
+      
       let data = [
         {
           "id": 1,
@@ -119,9 +119,9 @@ export default createStore({
       ]
 
       commit("setProducts", data);
-      */
+      
 
-      try {
+      /*try {
         const response = await axios.get(
         `http://127.0.0.1:8000/products-filter/`
         );
@@ -154,7 +154,7 @@ export default createStore({
       } catch (error) {
         console.warn(error);
       }
-
+*/
     },
     async getProductsByName({ commit }, name) {
       try {

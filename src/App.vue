@@ -1,31 +1,75 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/products">Products</router-link>
+  <div id="app">
+    <div class="common-layout">    
+      <el-container>
+        <el-header>Header
+                        
+        </el-header>
+        <el-container>
+          <el-aside width="20%">Aside
+
+          </el-aside>
+          <el-container>
+            <el-main>
+                  <router-view/>
+            </el-main>
+            <el-footer>Footer
+
+            </el-footer>
+          </el-container>
+        </el-container>
+      </el-container>
+    </div> 
   </div>
-  <router-view/>
 </template>
 
-<style>
-#app {
+
+<style scoped>
+.el-header {
+  background-color: #2f1781;
+  color: #eeeded;
+  text-align: center;
+  line-height: 60px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.el-footer {
+  background-color: #80dcd8;
+  color: #161B1B;
   text-align: center;
-  color: #2c3e50;
+  line-height: 60px;
 }
 
-#nav {
-  padding: 30px;
+.el-aside {
+  background-color: #473fa7;
+  color: #e8cd34;
+  text-align: center;
+  line-height: 650px;
+  padding: 20px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.el-main {
+  background-color: #eeeded;
+  color: #161B1B;
+  text-align: center;
+  line-height: 160px;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+body > .el-container {
+  margin-bottom: 40px;
 }
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+}
+
 </style>
+
+
+
