@@ -33,6 +33,17 @@
                             <input type="checkbox" :value="theData[index]" v-model="selected">
                             <i class="form-icon"></i>
                         </label>
+                        <span v-if="obj.type === 'inputdata'">{{ row[obj.key] }}</span>
+
+                        <label  v-if="obj.type === 'inputdata'" class="form-checkbox">
+                            <input 
+                            v-model.lazy="amount" 
+                            @keyup.enter="update(index)" 
+                            @keypress="isNumber($event)"
+                            >
+                                <i class="form-icon"></i>
+                        </label>
+
                     </td>
                 </tr>
             </tbody>
@@ -48,12 +59,14 @@ export default {
     props: {
         theData: Object, 
         config: Object,
-        textValue: String
+        textValue: String,
+        getSelected: Promise,
     },
     emits: ["update:textValue"],
     data: () => ({
         selectAll: false,
-        selected: []
+        selected: [],
+        amount: undefined,
     }),
     computed: {
          /*
@@ -72,6 +85,29 @@ export default {
                 }
             }
         },
+        update(index) {
+            this.$emit("setAmount", this.theData[index].id, this.amount);
+            this.amount = "";            
+        },
+        resetInput() {
+            try {
+                console.log('reset input');
+                //this.$refs["number"].$el.focus();
+                this.$refs.email.focus();
+                this.$refs["email"].value = "";
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();
+            } else {
+                return true;
+            }
+        }        
     },
     mounted() {
         //this.selected = this.onhands;

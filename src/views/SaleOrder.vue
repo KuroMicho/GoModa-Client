@@ -4,6 +4,7 @@
         v-if="onhandsFilter"
         :theData="onhandsFilter"
         :config="config"
+        @setAmount="setAmount"
         v-model:textValue="valueInput"
         />
     </div>
@@ -46,12 +47,29 @@ export default {
                 type: 'array'
             },
             {
-                key: 'id',
+                key: 'amount',
                 title: 'Number Unit',
                 type: 'inputdata'
-            }
+            },
+            {
+                key: '',
+                title: 'Edit',
+                type: 'text'
+            },          
         ],
     }),
+    methods: {
+        setAmount(id, amount) {
+            //this.onhandsFilter[index] = amount;
+            console.info("id ", id, "  amount: ", amount);
+
+            let val = {
+                productid: id,
+                productamount: amount,
+            }
+            this.$store.dispatch("setProductOnHandsFilterAmount", val);
+        }
+    },
     computed: {
         ...mapGetters(["onhands", "onhandsFilter"]),
     },

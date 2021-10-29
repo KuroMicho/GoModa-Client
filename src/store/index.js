@@ -32,6 +32,20 @@ export default createStore({
     setOnhandsFilter(state, payload) {
       state.onhandsFilter = payload;
     },
+    setOnhandsFilterByAmount(state, payload) {
+
+      let filters = state.onhandsFilter;
+      for (let k in filters) {
+        if (typeof filters[k] === "object") {
+          for (let i = 0; i <= k; i++) {
+            if (filters[k].id == payload.productid)
+            {
+              filters[k].amount = payload.productamount;
+            }
+          }
+        }
+      }
+    }
   },
   actions: {
     async getProducts({ commit }) {
@@ -257,12 +271,23 @@ export default createStore({
     */
     },
     setProductsOnHands({ commit }, select) {
+
+      let objSelected = select;
+      for (let k in objSelected) {
+        if (typeof objSelected[k] === "object") {
+          objSelected[k].amount = 0;
+        }
+      }
+
       commit("setOnhands",  select);
       commit("setOnhandsFilter",  select);
     },
     setProductsOnHandsFilter({ commit }, select) {
       commit("setOnhandsFilter",  select);
     },
+    setProductOnHandsFilterAmount({ commit }, val) {
+      commit("setOnhandsFilterByAmount", val);
+    }
   },
   modules: {
   }
