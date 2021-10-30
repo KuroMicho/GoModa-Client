@@ -1,53 +1,77 @@
 <template>
-        <footer class="page-footer z-depth-1">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="blue-grey-text text-darken-4">gomodago</h5>
-                <p class="blue-grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="blue-grey-text text-darken-4">Links</h5>
-                <ul>  
-                  <li><a class="blue-grey-text text-darken-4 " href="https://cli.vuejs.org">Vue</a></li>
-                  <li><a class="blue-grey-text text-darken-4 " href="https://materializecss.com/">Materialize</a></li>                 
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container white-text">
-            <h6>© 2021 MISION TIC P22-5</h6>
-            </div>
-          </div>
-        </footer>
+  <footer class="footer">
+    <div class="footer__header">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWFvNll2oAoBW1Cvkpc8HkbVVxs8gA0xdij4-OKBCWwYcarQpJ9IokRiBamKXHDnVKkag&usqp=CAU"
+        alt="logo gomoda"
+      />
+    </div>
+    <div class="footer__body">
+      <div>
+        <p>
+          Store managment inventory for clothing store.
+        </p>
+      </div>
+      <div>
+        <h5>Links</h5>
+        <ul>
+          <li>
+            <i class="fab fa-vuejs"></i>
+            <a href="https://cli.vuejs.org">Vue</a>
+          </li>
+          <li>
+            <i class="fab fa-github"></i>
+            <a href="https://bitbucket.org/juandevU/gomodago_fd/src">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__copy">
+      <h6>© 2021 MISION TIC P22-5</h6>
+    </div>
+  </footer>
 </template>
 
 <script>
 export default {
-    name: 'Footer'
-
-}
+  name: "Footer",
+};
 </script>
 
 <style scoped>
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+.footer {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+  background-color: rgba(240, 128, 128, 0.4);
+}
 
-  main {
-    flex: 1 0 auto;
-  }
+.footer__header > img {
+  width: 120px;
+  height: 120px;
+}
 
-  .page-footer{
-    background: #80DDD9;
-    bottom: 0;
-  }
-  .footer-copyright{
-    bottom: 0;
-    background: #7cddd8;
-  }
+.footer__body {
+  display: flex;
+  justify-content: space-around;
+}
 
+.footer__body * ul {
+  list-style: none;
+  display: flex;
+  margin-top: 20px;
+}
+
+.footer__body * li:not(li:last-of-type) {
+  margin-right: 20px;
+}
+
+.footer__body * i {
+  margin-right: 10px;
+}
+
+.footer__body * a {
+  text-decoration: none;
+  color: gray;
+}
 </style>

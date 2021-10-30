@@ -1,61 +1,95 @@
 <template>
-    <div>
-        <nav>
-            <div class="nav-wrapper indigo darken-1">
-                <a href="#" class="brand-logo left"></a>
-                <img alt="GO logo" src="../assets/go.png" width="50" height="50">
-               
-                  <ul id="nav-mobile" class="right hide-on-med-and-down waves-effect waves-light btn-large indigo darken-1">
-                    <li><router-link to="/">Home</router-link></li>
-                    <li><router-link to="/feature">Products</router-link></li>
-                    <li><router-link to="/feature">Purchase Order</router-link></li>
-                    <li><router-link to="/feature">Sale Order</router-link></li>
-                    <li><router-link to="/feature">Suppliers</router-link></li>
-                    <!--<li><a href="badges.html">Components</a></li>-->
-                    <li><a href="collapsible.html">SIGN IN</a></li>
-                    <li><a href="collapsible.html">LOGIN</a></li>
-                  </ul>
-                
-            </div>
-        </nav>
-    </div>
+  <div class="navbar">
+    <router-link to="/">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWFvNll2oAoBW1Cvkpc8HkbVVxs8gA0xdij4-OKBCWwYcarQpJ9IokRiBamKXHDnVKkag&usqp=CAU"
+        alt="ecommerce gomoda"
+      />
+    </router-link>
+    <NavbarLink
+      :staffRoutes="staffRoutes"
+      :vendorRoutes="vendorRoutes"
+      :publicRoutes="publicRoutes"
+    />
+  </div>
 </template>
-
 <script>
+import NavbarLink from "./NavbarLink.vue";
 export default {
-    name: 'NavBar'
-
-}
+  name: "Navbar",
+  data() {
+    return {
+      staffRoutes: [
+        {
+          path: "/users",
+          name: "Users",
+          icon: "fas fa-users",
+        },
+        {
+          path: "/products",
+          name: "Products",
+          icon: "fas fa-tshirt",
+        },
+        {
+          path: "/sales",
+          name: "Sales",
+          icon: "fas fa-shopping-cart",
+        },
+        {
+          path: "/purchases",
+          name: "Purchases",
+          icon: "fas fa-store-alt",
+        },
+        {
+          name: "Logout",
+          icon: "fas fa-sign-out-alt",
+        },
+      ],
+      vendorRoutes: [
+        {
+          path: "/products",
+          name: "Products",
+          icon: "fas fa-tshirt",
+        },
+        {
+          name: "Logout",
+          icon: "fas fa-sign-out-alt",
+        },
+      ],
+      publicRoutes: [
+        {
+          path: "/login",
+          name: "Login",
+        },
+        {
+          path: "/register",
+          name: "Register",
+        },
+      ],
+    };
+  },
+  components: {
+    NavbarLink,
+  },
+};
 </script>
-
 <style scoped>
-    #nav-mobiles {
-  color: white;
-  padding: 15px 15px 15px 15px;
-  text-align: center;
-  /*display:-moz-deck;*/
-  font-size: 14px;
-  border-radius: 8px;
-  transition-duration: 0.4s;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 200px;
+  background-image: linear-gradient(
+    to left,
+    rgba(185, 118, 194, 0.5) 0%,
+    rgba(201, 79, 120, 0.459) 40%,
+    rgba(200, 123, 140, 0.2)
+  );
 }
 
-.button:hover {
-  background-color: #4CAF50; /* Green */
-  color: white;
+.navbar img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 }
-
-
-  #nav {
-  padding: 0px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
 </style>

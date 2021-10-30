@@ -1,60 +1,34 @@
 <template>
   <v-app>
-
-    <div class="header">
-      <NavBar/>
-    </div>
-
-    <div class="aside">
-
-    </div>
-
-    <div class="field">
-      <router-view/> 
-    </div>
-
-    <div class="footer">
-       <Footer/>
-    </div>
-
-  </v-app>  
+    <router-view />
+  </v-app>
 </template>
 
 <script>
-
-import NavBar from '@/components/NavBar.vue'
-import Footer from '@/components/Footer.vue'
-
 export default {
-  components: {
-    NavBar,
-    Footer,
-  }
-}
+  name: "App",
+};
 </script>
-
-<style scoped>
-
-header {
-  grid-column: 1 / 12;
-  grid-row: 1;
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
 }
 
-field {
-  grid-column: 4 / 12;
-  grid-row: 2;
+:root {
+  --pixel: 250px;
 }
 
-aside {
-  grid-column: 1 / 4;
-  grid-row: 2;
-  background:aqua;
+html {
+  box-sizing: border-box;
 }
 
-footer {
-  grid-column: 1 / 12;
-  grid-row: 3;
-  bottom: 0;
+body {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #2c3e50;
 }
 </style>
-
