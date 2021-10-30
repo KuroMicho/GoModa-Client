@@ -2,8 +2,10 @@
   <div id="app">
     <div class="common-layout">    
       <el-container>
-        <el-header>Header
-                        
+        <el-header>
+
+          <NavBar/> 
+             
         </el-header>
         <el-container>
           <el-aside width="20%">Aside
@@ -13,7 +15,7 @@
             <el-main>
                   <router-view/>
             </el-main>
-            <el-footer>Footer
+            <el-footer>®MISIONTIC 2022 UNAL P22-5
 
             </el-footer>
           </el-container>
@@ -23,29 +25,43 @@
   </div>
 </template>
 
+<script>
+import NavBar from '@/components/NavBar.vue'
+
+
+export default {
+  components: {
+    NavBar,
+  
+  }
+}
+</script>
 
 <style scoped>
+
+
 .el-header {
-  background-color: #2f1781;
+  background-color: #473fa7;
   color: #eeeded;
   text-align: center;
   line-height: 60px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 2px;
+
 }
 .el-footer {
-  background-color: #80dcd8;
-  color: #161B1B;
+  background-color:  #2f1781;
+  color: #eeeded;
   text-align: center;
   line-height: 60px;
 }
 
 .el-aside {
-  background-color: #473fa7;
-  color: #e8cd34;
+  background-color:  #80dcd8;
+  color: #161B1B;
   text-align: center;
-  line-height: 650px;
+  line-height: 600px;
   padding: 20px;
 }
 
