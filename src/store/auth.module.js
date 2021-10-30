@@ -20,6 +20,30 @@ export const auth = {
           return Promise.reject(error);
         });
     },
+    login({ commit }, user) {
+      return AuthService.login(user)
+        .then((user) => {
+          commit("loginSuccess", user);
+          return Promise.resolve(user);
+        })
+        .catch((error) => {
+          commit("loginFailure");
+          return Promise.reject(error);
+        });
+    },
+    logout({ commit }) {
+      AuthService.logout()
+        .then(() => {
+          commit("logout");
+          return Promise.resolve();
+        })
+        .catch((error) => {
+          return Promise.reject(error);
+        });
+    },
+    refreshToken({ commit }, accessToken) {
+      commit("refreshToken", accessToken);
+    },
   },
   mutations: {
     registerSuccess(state) {
@@ -27,6 +51,22 @@ export const auth = {
     },
     registerFailure(state) {
       state.status.loggedIn = false;
+    },
+    loginSuccess(state, user) {
+      state.status.loggedIn = true;
+      state.user = user;
+    },
+    loginFailure(state) {
+      state.status.loggedIn = false;
+      state.user = {};
+    },
+    logout(state) {
+      state.status.loggedIn = false;
+      state.user = {};
+    },
+    refreshToken(state, accessToken) {
+      state.status.loggedIn = true;
+      state.user = { ...state.user, accessToken: accessToken };
     },
   },
 };

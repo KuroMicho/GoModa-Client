@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueChartkick from "vue-chartkick";
+import setup from "./utils/setupInterceptor";
 
 router.beforeEach((to, from, next) => {
   const publicPages = ["/login", "/register", "/"];
@@ -15,6 +16,8 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+setup(store);
 
 createApp(App)
   .use(store)
