@@ -1,10 +1,7 @@
 <template>
   <footer class="footer">
     <div class="footer__header">
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWFvNll2oAoBW1Cvkpc8HkbVVxs8gA0xdij4-OKBCWwYcarQpJ9IokRiBamKXHDnVKkag&usqp=CAU"
-        alt="logo gomoda"
-      />
+      <img src="../assets/main_img.png" alt="logo gomoda" />
     </div>
     <div class="footer__body">
       <div>

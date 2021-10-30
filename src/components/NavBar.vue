@@ -1,10 +1,7 @@
 <template>
   <div class="navbar">
     <router-link to="/">
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWFvNll2oAoBW1Cvkpc8HkbVVxs8gA0xdij4-OKBCWwYcarQpJ9IokRiBamKXHDnVKkag&usqp=CAU"
-        alt="ecommerce gomoda"
-      />
+      <img src="../assets/main_img.png" alt="ecommerce gomoda" />
     </router-link>
     <NavbarLink
       :staffRoutes="staffRoutes"
