@@ -25,9 +25,8 @@
             <el-table-column property="barcode" label="Barcode" width="120" />
             <el-table-column property="name" label="Name" width="120" />
             <el-table-column property="price" label="Price" width="120" />
-
+            <el-table-column property="inventory_onhand" label="On hand" width="120" />
             <el-table-column property="amount" label="Units" width="120" />
-            <el-table-column property="description" label="Description" show-overflow-tooltip />
             
             <el-table-column label="Operations">
                 <template #default="scope">
@@ -44,25 +43,33 @@
             </el-table-column>            
         </el-table>
 
+        <modal-sale
+        :modalIsShow="modalIsShow"
+        :product="productSelected"
+        @setAmount="setAmount"
+        @close_modal="handleAddModal"
+        />
+
 
 
     </div>
 </template>
 
 <script>
-
+import ModalSale from '../components/ModalSale.vue'
 //import CustomTable from '../components/Table.vue'
 import { mapGetters } from "vuex";
 export default {
     name: 'sale-order',
     components: {
 //        CustomTable,
+        ModalSale,
     },
     data: () => ({
         valueInput: "",
         multipleSelection: [],
         search: '',
-
+        modalIsShow: false,
         productSelected: undefined,
         config: [
             {
@@ -117,8 +124,12 @@ export default {
             this.multipleSelection = val;
         },
         handleEdit(index, row) {
-            console.log(index, row);
-        },        
+            this.productSelected = row;
+            this.handleAddModal(true);
+        },
+        handleAddModal(value) {
+            this.modalIsShow = value;
+        },
     },
     computed: {
         ...mapGetters(["onhands", "onhandsFilter"]),
@@ -140,5 +151,10 @@ export default {
 </script>
 
 <style scoped>
+
+body {
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+}
 
 </style>
