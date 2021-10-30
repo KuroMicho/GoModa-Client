@@ -13,10 +13,7 @@
         <div class="lds-heart"><div></div></div>
       </span>
       <router-link to="/">
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWFvNll2oAoBW1Cvkpc8HkbVVxs8gA0xdij4-OKBCWwYcarQpJ9IokRiBamKXHDnVKkag&usqp=CAU"
-          alt="logo gomoda"
-        />
+        <img src="../assets/main_img.png" alt="logo gomoda" />
       </router-link>
       <Form @submit="handleLogin" :validation-schema="schema">
         <div class="form-group">
@@ -146,9 +143,12 @@ export default {
 }
 
 .form-container * img {
-  height: 150px;
-  width: 150px;
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  object-fit: cover;
 }
+
 .field-container {
   width: 100%;
   position: relative;
