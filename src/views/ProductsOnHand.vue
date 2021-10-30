@@ -29,7 +29,7 @@
     <el-table-column property="minimum_required" label="Minimum" width="120" />
     <el-table-column property="inventory_received" label="Received" width="120" />
     <el-table-column property="inventory_shipped" label="Shipped" width="120" />
-    <el-table-column property="inventory_onhand" label="On Hands" width="120" />
+    <el-table-column property="inventory_onhand" label="On Hand" width="120" />
     <el-table-column property="description" label="Description" show-overflow-tooltip />
 
     <el-table-column align="right">
@@ -42,7 +42,9 @@
 
   <div style="margin-top: 20px">
     <el-button @click="toggleSelection()">Clear selection</el-button>
-    <el-button @click="saveSelected()">Sale Order</el-button>
+    <el-button @click="saveSelected()">
+      <router-link to="/sale-order">Sale Order</router-link>
+    </el-button>
   </div>
 
   <el-row class="tac">

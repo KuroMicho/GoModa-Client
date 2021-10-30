@@ -287,7 +287,20 @@ export default createStore({
     },
     setProductOnHandsFilterAmount({ commit }, val) {
       commit("setOnhandsFilterByAmount", val);
-    }
+    },
+    async createSale({ commit }, data) {
+      try {
+        const response = await axios.post(
+          `http://127.0.0.1:8000/product/${data.product}/sale/`,
+          data
+        );
+        if (response.statusText == "OK") {
+          commit("setProducts", response.data);
+        }
+      } catch (error) {
+        console.warn(error);
+      }
+    },
   },
   modules: {
   }

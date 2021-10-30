@@ -50,7 +50,11 @@
         @close_modal="handleAddModal"
         />
 
-
+        <div style="margin-top: 20px">
+            <el-button @click="sendSaleOrder()">
+                <router-link to="/products">Apply order</router-link>
+            </el-button>
+        </div>
 
     </div>
 </template>
@@ -130,6 +134,29 @@ export default {
         handleAddModal(value) {
             this.modalIsShow = value;
         },
+        async sendSaleOrder() {
+            console.info('sending....');
+             let objSelected = this.onhandsFilter;
+            for (let k in objSelected) {
+                if (typeof objSelected[k] === "object") {
+                //objSelected[k].amount = 0;
+                    if (objSelected[k].amount > 0) {
+                        console.log(objSelected[k]);
+                        let data = {
+                            product: objSelected[k].id,
+                            number_shipments: objSelected[k].amount,
+                        }
+                        try {
+                            await this.$store.dispatch("createSale", data);
+                            this.$store.dispatch("setProductsOnHandsFilter", []);
+                            this.$store.dispatch("getProducts");
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                }
+            }
+        }
     },
     computed: {
         ...mapGetters(["onhands", "onhandsFilter"]),
