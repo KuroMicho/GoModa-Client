@@ -18,7 +18,7 @@
             !search || data.name.toLowerCase().includes(search.toLowerCase())
         )
         "    
-        style="width: 100%"
+        style="width: 65%"
         @selection-change="handleSelectionChange"
         >
             <!--Barcode 	Name 	Description 	Price 	Color 	Number Unit 	Edit  -->
@@ -28,17 +28,14 @@
             <el-table-column property="inventory_onhand" label="On hand" width="120" />
             <el-table-column property="amount" label="Units" width="120" />
             
-            <el-table-column label="Operations">
+            <el-table-column align="right">
+                <template #header>
+                    <el-input v-model="search" size="mini" placeholder="Type to search" />
+                </template>
                 <template #default="scope">
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
                     >Edit</el-button
                     >
-                </template>
-            </el-table-column>
-
-            <el-table-column align="right">
-                <template #header>
-                    <el-input v-model="search" size="mini" placeholder="Type to search" />
                 </template>
             </el-table-column>            
         </el-table>

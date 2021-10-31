@@ -19,7 +19,7 @@
           !search || data.name.toLowerCase().includes(search.toLowerCase())
       )
     "    
-    style="width: 100%"
+    style="width: 95%"
     @selection-change="handleSelectionChange"
   >
     <el-table-column type="selection" width="55" />
