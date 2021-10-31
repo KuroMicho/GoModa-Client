@@ -339,6 +339,19 @@ export default createStore({
         console.warn(error);
       }
     },
+    async createPurchase({ commit }, data) {
+      try {
+        const response = await axios.post(
+          `http://127.0.0.1:8000/product/${data.product}/purchase/`,
+          data
+        );
+        if (response.statusText == "OK") {
+          commit("setProducts", response.data);
+        }
+      } catch (error) {
+        console.warn(error);
+      }
+    },
   },
   modules: {
   }

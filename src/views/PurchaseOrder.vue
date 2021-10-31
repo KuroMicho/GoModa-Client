@@ -41,6 +41,12 @@
         @close_modal="handleAddModal"
         />        
 
+        <div style="margin-top: 20px">
+            <el-button @click="sendPurchaseOrder()">
+                <router-link to="/products">Apply order</router-link>
+            </el-button>
+        </div>
+
     </div>
 </template>
 
@@ -85,7 +91,31 @@ export default {
         },
         handleAddModal(value) {
             this.modalIsShow = value;
-        },        
+        },
+        async sendPurchaseOrder() {
+            console.info('sending....');
+             let objSelected = this.onhandsFilter;
+            for (let k in objSelected) {
+                if (typeof objSelected[k] === "object") {
+                //objSelected[k].amount = 0;
+                    if (objSelected[k].amount > 0) {
+                        console.log(objSelected[k]);
+                        let data = {
+                            product: objSelected[k].id,
+                            number_purchases: objSelected[k].amount,
+                            supplier: objSelected[k].supplierid,
+                        }
+                        try {
+                            await this.$store.dispatch("createPurchase", data);
+                            this.$store.dispatch("setProductsOnHandsFilter", []);
+                            this.$store.dispatch("getProducts");
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                }
+            }
+        }
     },
     mounted () {
         this.$store.dispatch("getSuppliers");
