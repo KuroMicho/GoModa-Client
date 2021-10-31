@@ -36,6 +36,7 @@
         <modal-purchase
         :modalIsShow="modalIsShow"
         :product="productSelected"
+        :suppliers="suppliers"
         @setAmount="setAmount"
         @close_modal="handleAddModal"
         />        
@@ -58,12 +59,12 @@ export default {
         productSelected: undefined,        
     }),    
     computed: {
-        ...mapGetters(["onhandsFilter"]),
+        ...mapGetters(["onhandsFilter", "suppliers"]),
     },
     methods: {
-        setAmount(id, amount) {
+        setAmount(id, amount, supplierid) {
             //this.onhandsFilter[index] = amount;
-            console.info("id ", id, "  amount: ", amount);
+            console.info("id ", id, "  amount: ", amount, " supplier: ", supplierid);
             /*
             let val = {
                 productid: id,
@@ -83,6 +84,9 @@ export default {
         handleAddModal(value) {
             this.modalIsShow = value;
         },        
+    },
+    mounted () {
+        this.$store.dispatch("getSuppliers");
     },
 }
 </script>

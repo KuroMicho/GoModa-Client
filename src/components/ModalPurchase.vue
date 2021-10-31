@@ -31,6 +31,21 @@
             autocomplete="off">
             </el-input>
           </el-form-item>
+
+          <el-form-item label="Supplier">
+            <el-select v-model="supplier.name" placeholder="please select your zone">
+                <!--
+                <el-option @click="getColor('one')" label="Zone one" value="shanghai"></el-option>
+                <el-option @click="getColor('two')" label="Zone two" value="beijing"></el-option>
+                -->
+                <el-option v-for="(sup, ind) in suppliers" :key="ind" 
+                @click="getSupplier(sup.name, ind)"
+                label=""
+                :value="sup.name">
+                  {{ sup.name }}
+                </el-option>
+            </el-select>
+          </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('productInfo')">Update</el-button>
             <el-button @click="handleSubmit('productInfo')">Cancel</el-button>
@@ -53,6 +68,10 @@ export default {
         amount: undefined,
         productSelected: undefined,
       },
+      supplier: {
+          id: undefined,
+          name: '',
+      },
     };
   },
   props: {
@@ -60,6 +79,7 @@ export default {
       type: Boolean,
     },
     product: undefined,
+    suppliers: Array,
   },
   components: { 
     AddForm
@@ -72,7 +92,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid && this.productInfo.amount <= this.product.inventory_onhand && this.productInfo.amount > 0) {
-          this.$emit("setAmount", this.product.id, this.productInfo.amount);
+          this.$emit("setAmount", this.product.id, this.productInfo.amount, this.supplier.id);
           this.handleSubmit(formName);
         } else if (!this.productInfo.amount <= this.product.inventory_onhand) {
           console.error('error no available product!!');
@@ -86,6 +106,12 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+    getSupplier(name, id) {
+        console.log(name, '  hola   ', id);
+        this.supplier.name = name;
+        this.supplier.id = id + 1;
+        
+    }
   },
 };
 </script>

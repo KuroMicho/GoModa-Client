@@ -8,6 +8,7 @@ export default createStore({
     onhandsFilter: [],
     materials: [],
     colors: [],
+    suppliers: [],
   },
   getters: {
     products: state => state.products,
@@ -15,6 +16,7 @@ export default createStore({
     onhandsFilter: state => state.onhandsFilter,
     materials: state => state.materials,
     colors: state => state.colors,
+    suppliers: state => state.suppliers,
   },
   mutations: {
     setProducts(state, payload) {
@@ -32,6 +34,9 @@ export default createStore({
     setOnhandsFilter(state, payload) {
       state.onhandsFilter = payload;
     },
+    setSuppliers(state, payload) {
+      state.suppliers = payload;
+    },    
     setOnhandsFilterByAmount(state, payload) {
 
       let filters = state.onhandsFilter;
@@ -296,6 +301,18 @@ export default createStore({
         );
         if (response.statusText == "OK") {
           commit("setProducts", response.data);
+        }
+      } catch (error) {
+        console.warn(error);
+      }
+    },
+    async getSuppliers({ commit }) {
+      try {
+        const response = await axios.get(
+        `http://127.0.0.1:8000/suppliers/`
+        );
+        if (response.statusText == "OK") {
+          commit("setSuppliers", response.data);
         }
       } catch (error) {
         console.warn(error);
