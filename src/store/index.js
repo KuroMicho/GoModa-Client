@@ -50,7 +50,23 @@ export default createStore({
           }
         }
       }
-    }
+    },
+    setOnhandsFilterByAmountSupplier(state, payload) {
+
+      let filters = state.onhandsFilter;
+      for (let k in filters) {
+        if (typeof filters[k] === "object") {
+          for (let i = 0; i <= k; i++) {
+            if (filters[k].id == payload.productid)
+            {
+              filters[k].amount = payload.productamount;
+              filters[k].suppliername = payload.suppliername;
+              filters[k].supplierid = payload.supplierid;
+            }
+          }
+        }
+      }
+    }    
   },
   actions: {
     async getProducts({ commit }) {
@@ -281,6 +297,8 @@ export default createStore({
       for (let k in objSelected) {
         if (typeof objSelected[k] === "object") {
           objSelected[k].amount = 0;
+          objSelected[k].suppliername = '';
+          objSelected[k].supplierid = undefined;          
         }
       }
 
@@ -292,6 +310,9 @@ export default createStore({
     },
     setProductOnHandsFilterAmount({ commit }, val) {
       commit("setOnhandsFilterByAmount", val);
+    },
+    setProductOnHandsFilterAmountSupplier({ commit }, val) {
+      commit("setOnhandsFilterByAmountSupplier", val);
     },
     async createSale({ commit }, data) {
       try {
