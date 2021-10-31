@@ -91,12 +91,9 @@ export default {
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        if (valid && this.productInfo.amount <= this.product.inventory_onhand && this.productInfo.amount > 0) {
+        if (valid && this.productInfo.amount > 0) {
           this.$emit("setAmount", this.product.id, this.productInfo.amount, this.supplier);
           this.handleSubmit(formName);
-        } else if (!this.productInfo.amount <= this.product.inventory_onhand) {
-          console.error('error no available product!!');
-          return false;
         } else {
           console.error('error submit!!');
           return false;
