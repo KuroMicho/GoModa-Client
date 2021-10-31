@@ -33,28 +33,56 @@
             </el-table-column>            
         </el-table>
 
+        <modal-purchase
+        :modalIsShow="modalIsShow"
+        :product="productSelected"
+        @setAmount="setAmount"
+        @close_modal="handleAddModal"
+        />        
+
     </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-
+import ModalPurchase from '../components/ModalPurchase.vue'
 export default {
     name: 'purchase-order',
+    components: {
+        ModalPurchase,
+    },
     data: () => ({
         multipleSelection: [],
         search: '',
+        modalIsShow: false,
+        productSelected: undefined,        
     }),    
     computed: {
         ...mapGetters(["onhandsFilter"]),
     },
     methods: {
+        setAmount(id, amount) {
+            //this.onhandsFilter[index] = amount;
+            console.info("id ", id, "  amount: ", amount);
+            /*
+            let val = {
+                productid: id,
+                productamount: amount,
+            }
+            this.$store.dispatch("setProductOnHandsFilterAmount", val);
+            */
+        },        
         handleSelectionChange(val) {
             this.multipleSelection = val;
         },
         handleEdit(index, row) {
             console.log(index, row);
+            this.productSelected = row;
+            this.handleAddModal(true);            
         },
+        handleAddModal(value) {
+            this.modalIsShow = value;
+        },        
     },
 }
 </script>
