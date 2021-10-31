@@ -45,6 +45,9 @@
     <el-button @click="saveSelected()">
       <router-link to="/sale-order">Sale Order</router-link>
     </el-button>
+    <el-button @click="saveSelected()">
+      <router-link to="/purchase-order">Purchase Order</router-link>
+    </el-button>
   </div>
 
   <el-row class="tac">
