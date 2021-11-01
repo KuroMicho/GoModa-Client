@@ -86,9 +86,9 @@
                 @change="handleMaterialOption"
                 v-model="product.material"
               >
-                <option value="" disabled
-                  >-- Please select one material --</option
-                >
+                <option value="" disabled>
+                  -- Please select one material --
+                </option>
                 <option value="Algodon">Algodon</option>
                 <option value="Cuero">Cuero</option>
                 <option value="Seda">Seda</option>
@@ -101,14 +101,18 @@
           <div class="form__group">
             <div>
               <label for="price">Price:</label>
-              <Field type="number" name="price" />
+              <Field type="number" name="price" v-model="product.price" />
             </div>
             <ErrorMessage name="price" class="error-feedback" />
           </div>
           <div class="form__group">
             <div>
               <label for="minimum_required">Minimum Required:</label>
-              <Field type="text" name="minimum_required" />
+              <Field
+                type="text"
+                name="minimum_required"
+                v-model="product.minimum_required"
+              />
             </div>
             <ErrorMessage name="minimum_required" />
           </div>
@@ -260,6 +264,21 @@ export default {
   cursor: pointer;
 }
 
+.form__group > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.form__group > div > input,
+.form__group > div > select {
+  margin-top: 10px;
+  border-radius: 8px;
+  width: 50%;
+  padding: 5px 15px;
+  border: 1px solid gray;
+  outline: none;
+}
+
 .form {
   display: flex;
   justify-content: flex-start;
@@ -274,5 +293,16 @@ export default {
   min-width: 300px;
   display: flex;
   flex-direction: column;
+}
+
+.btn {
+  color: white;
+  cursor: pointer;
+  background-color: lightcoral;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 5px 15px;
+  margin-top: 20px;
 }
 </style>
