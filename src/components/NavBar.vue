@@ -33,6 +33,11 @@ export default {
           icon: "fas fa-shopping-cart",
         },
         {
+          path: "/suppliers",
+          name: "Suppliers",
+          icon: "fas fa-people-carry",
+        },
+        {
           path: "/purchases",
           name: "Purchases",
           icon: "fas fa-store-alt",
