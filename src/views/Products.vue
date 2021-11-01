@@ -11,7 +11,13 @@
       v-bind:modalIsShow="modalIsShow"
       @close_modal="modalIsShow = false"
     />
-    <button class="btn" @click="handleAddModal()">Add Product</button>
+    <button
+      v-show="!user.is_vendor && user.is__admin"
+      class="btn"
+      @click="handleAddModal()"
+    >
+      Add Product
+    </button>
     <el-table
       :data="
         products.filter(
@@ -44,7 +50,7 @@
           <el-input v-model="search" size="mini" placeholder="Type to search" />
         </template>
         <template #default="scope">
-          <div class="btn-actions">
+          <div class="btn-actions" v-show="!user.is_vendor && user.is__admin">
             <el-button
               size="mini"
               @click="this.$router.push(`/product/${scope.row.id}`)"
@@ -76,6 +82,7 @@
             <el-button
               size="mini"
               type="info"
+              v-show="!user.is_vendor && user.is__admin"
               @click="this.$router.push(`/product/${scope.row.id}/purchases/`)"
             >
               Purchases
@@ -137,7 +144,14 @@ export default {
     ElInput,
     Error,
   },
-  computed: { ...mapState("products", ["products"]) },
+  computed: {
+    ...mapState("products", ["products"]),
+    user() {
+      return this.$store.state.auth?.user
+        ? this.$store.state.auth.user.user
+        : 0;
+    },
+  },
   watch: {
     $route: {
       immediate: true,

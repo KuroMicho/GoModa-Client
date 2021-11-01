@@ -101,8 +101,7 @@ export default {
         })
         .catch((error) => {
           this.loading = false;
-          this.msg = `${error.response?.data?.msg ||
-            error + " something went wrong"}`;
+          this.msg = `${error}`;
           this.alertIsShow = true;
         });
     },

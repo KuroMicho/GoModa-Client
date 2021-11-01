@@ -8,6 +8,7 @@ import NotFound from "../components/NotFound.vue";
 import Users from "../views/Users.vue";
 import Suppliers from "../views/Suppliers.vue";
 import Purchases from "../views/Purchases.vue";
+import Sales from "../views/Sales.vue";
 
 const routes = [
   {
@@ -35,6 +36,12 @@ const routes = [
     path: "/product/:id/purchases",
     name: "Purchases",
     component: Purchases,
+    props: true,
+  },
+  {
+    path: "/product/:id/sales",
+    name: "Sales",
+    component: Sales,
     props: true,
   },
   {
