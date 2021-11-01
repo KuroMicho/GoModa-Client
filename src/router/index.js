@@ -7,6 +7,7 @@ import Product from "../views/Product.vue";
 import NotFound from "../components/NotFound.vue";
 import Users from "../views/Users.vue";
 import Suppliers from "../views/Suppliers.vue";
+import Purchases from "../views/Purchases.vue";
 
 const routes = [
   {
@@ -28,6 +29,12 @@ const routes = [
     path: "/product/:id",
     name: "Product",
     component: Product,
+    props: true,
+  },
+  {
+    path: "/product/:id/purchases",
+    name: "Purchases",
+    component: Purchases,
     props: true,
   },
   {

@@ -3,7 +3,8 @@ import { auth } from "./auth.module";
 import { products } from "./products.module";
 import { users } from "./users.module";
 import { suppliers } from "./suppliers.module";
+import { purchases } from "./purchases.module";
 
 export default createStore({
-  modules: { auth, products, users, suppliers },
+  modules: { auth, products, users, suppliers, purchases },
 });
