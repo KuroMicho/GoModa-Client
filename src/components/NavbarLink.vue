@@ -47,7 +47,7 @@ export default {
   computed: {
     // a computed getter
     user() {
-      return 0;
+      return this.$store.state.auth.user ? this.$store.state.auth.user.user : 0;
     },
   },
   props: {
