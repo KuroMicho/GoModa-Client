@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import Products from "../views/Products.vue";
 import Product from "../views/Product.vue";
 import NotFound from "../components/NotFound.vue";
+import Users from "../views/Users.vue";
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     name: "Product",
     component: Product,
     props: true,
+  },
+  {
+    path: "/users",
+    name: "Users",
+    component: Users,
   },
   {
     path: "/register",
